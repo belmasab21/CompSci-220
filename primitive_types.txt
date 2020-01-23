@@ -1,0 +1,10 @@
+8 Primitives
+
+boolean		true/false	8 bits
+char		characters	16 bits
+int		whole #'s	32 bits
+long		whole #'s	64 bits
+short		whole #'s	16 bits
+byte		whole #'s	8 bits
+double		decimals	64 bits
+float		decimals	32 bits

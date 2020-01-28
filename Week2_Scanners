@@ -1,0 +1,31 @@
+//This class will introduce interpolation, and review how to import and utilize scanners.
+
+import java.util.Scanner;
+public class Lab2 {
+    public static void main(String[] args) {
+       Scanner a = new Scanner(System.in); 
+            System.out.println("What is your favorite movie?");
+                String movieTitle = a.nextLine();
+                
+            System.out.println("What year was it released?");
+                String releaseYearStr = a.nextLine();
+                //Line 11 'parses' the string to an integer. Basically a converter
+                int releaseYear = Integer.parseInt(releaseYearStr);
+                
+            System.out.println("Who was the director?");
+                String director = a.nextLine();
+                
+            System.out.println("What would you rate the movie out of 10?");
+                String ratingStr = a.nextLine();
+                double rating = Double.parseDouble(ratingStr);
+       //This is Concatenation (Line 20)         
+       //System.out.println("Your favorite movie is " + movieTitle + " (" + releaseYear + "), directed by " + director + ". [" + rating + " /10.0]");
+           
+            //For interpolation (Line 23), %s = string, %d = int, %f = double or float
+            System.out.printf("Your favorite movie is %s (%d), directed by %s [ %.2f / 10.0] %n" , movieTitle, releaseYear, director, rating);
+            //on the flag %f, putting .[#] in front of the f will tell the jde how many decimal places you want in the double
+            //Using %n or /n at the end will make a new line, which doesn't come standard with System.out.printf
+            System.out.println("Goodbye!");
+             
+    }  
+}

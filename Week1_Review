@@ -1,0 +1,42 @@
+//This lab was all review of things we did in the computer science section before this one.
+
+class lab1 {
+    public static void main(String[] args) {
+        /*
+        boolean     true/false      8 bits
+        char        characters      16 bits       0 to 65,535
+        int         whole #'s       32 bits       -2^31 to 2^31 - 1   (2,147,483,647)
+        long        whole #'s       64 bits       -2^63 to 2^63 - 1   (9,223,372,036,775,807)
+        short       whole #'s       16 bits       -32,768 to 32,767
+        byte        whole #'s       8 bits        -128 to 127
+        double      decimal values  64 bits       theoretically infinite*
+        float       decimal values  32 bits       theoretically infinite*
+        */
+    
+                short numberOfStudents = 32;             //example of a camel Case for naming
+                short totalNumberOfStudents = 35;
+       
+       // 1) math with a double will always yield a double
+       // 2) math with a float will always yield a float
+       // 3) math with a long will always yield a long
+       // 4) if none of the others apply, it will be an integer
+       
+                int numberOfAbsentStudents = totalNumberOfStudents - numberOfStudents;
+            System.out.print("The number of absent students is ");
+            System.out.println(numberOfAbsentStudents);
+            
+                double percentOfStudentsInAttendance = ((double)numberOfAbsentStudents / numberOfStudents);
+            System.out.println("The percent of students that are in class is " + percentOfStudentsInAttendance + "%.");
+            
+       if (percentOfStudentsInAttendance >= 0.5) {
+           System.out.println("At least half of the students showed up today!");
+          }
+       else {
+           System.out.println("Less than half of the students showed up today");
+          }     
+       if (percentOfStudentsInAttendance == totalNumberOfStudents) {
+           System.out.println("Everyone is here today!");
+        }
+        
+        }
+}

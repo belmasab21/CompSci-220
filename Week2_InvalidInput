@@ -1,0 +1,41 @@
+//This code will do a try/catch method to find invalid inputs and kill the program if anything is incorrect
+import java.util.Scanner;
+public class Lab3 {
+    public static void main(String[] args) {
+    Scanner a = new Scanner(System.in);
+    
+        System.out.println("What is the title of your favorite movie");
+        String title = a.nextLine();
+        
+        System.out.println("What year was it released?");
+        String yearStr = a.nextLine();
+        int year;
+                    /* 
+                     Try/catch Block
+                     throws Exception
+                     Handle Unhandled
+                    */
+        try {
+            year = Integer.parseInt(yearStr);
+        }
+        catch (Exception e) {
+            System.out.println("Invalid Input");
+            return;
+        }
+         
+        System.out.println("Who is the director?");
+        String director = a.nextLine();
+        
+        System.out.println("What would you rate the movie out of 10.0?");
+        String ratingStr = a.nextLine();
+        double rating;
+        try {
+         rating = Double.parseDouble(ratingStr);
+        }
+        catch (Exception e) {
+            System.out.println("Invalid Input");
+            return;
+        }
+    }      
+}
+

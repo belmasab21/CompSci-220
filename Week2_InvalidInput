@@ -1,4 +1,4 @@
-//This code will do a try/catch method to find invalid inputs and kill the program if anything is incorrect
+//This code will use the try/catch method and if statements to make sure the inputs are valid
 import java.util.Scanner;
 public class Lab3 {
     public static void main(String[] args) {
@@ -9,17 +9,21 @@ public class Lab3 {
         
         System.out.println("What year was it released?");
         String yearStr = a.nextLine();
+                                  /* 
+                                  Try/catch Block
+                                  throws Exception
+                                  Handle Unhandled
+                                  */
         int year;
-                    /* 
-                     Try/catch Block
-                     throws Exception
-                     Handle Unhandled
-                    */
         try {
             year = Integer.parseInt(yearStr);
         }
         catch (Exception e) {
             System.out.println("Invalid Input");
+            return;
+        }
+        if (year<1890 || year>2020) {
+            System.out.println("Invalid Year");
             return;
         }
          
@@ -36,7 +40,12 @@ public class Lab3 {
             System.out.println("Invalid Input");
             return;
         }
+        if (rating>10 || rating<0) {
+            System.out.println("Invalid Rating");
+            return;
+        }    
+        
         System.out.printf("Your favorite movie is %s [%d], directed by %s, you gave it a %.1f/10.0. %n" ,title, year, director, rating); 
-    }      
+    }       
 }
 

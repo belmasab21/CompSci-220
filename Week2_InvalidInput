@@ -36,6 +36,7 @@ public class Lab3 {
             System.out.println("Invalid Input");
             return;
         }
+        System.out.printf("Your favorite movie is %s [%d], directed by %s, you gave it a %.1f/10.0. %n" ,title, year, director, rating); 
     }      
 }
 

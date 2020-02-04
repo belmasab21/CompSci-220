@@ -1,0 +1,25 @@
+//This class will make an array and use while and for loops in order to print the statements without too much effort
+public class Lab4 {
+   public static void main(String[] args) { 
+    String[] movieTitles = new String[5]; //[_____](0,1,2,3,4) <-- Zero based indexing
+    movieTitles[0] = "Title I";
+    movieTitles[1] = "Title II";
+    movieTitles[2] = "Title III";
+    movieTitles[3] = "Title IV";
+    movieTitles[4] = "Title V";
+  
+    String favoriteMovie = movieTitles[0];
+    System.out.printf("Your favorite movie is %s%n" , favoriteMovie);
+    
+    int index = 0;
+    while(index < movieTitles.length) {
+        String title = movieTitles[index];
+        System.out.printf("%d)\t%s%n" , index + 1, title);
+        index++; //Adding one to the index, so it doesn't loop forever
+        }
+    for(int i = 0; 1 < movieTitles.length; i++) {
+        String title = movieTitles[i];
+        System.out.printf("5d)\t%s%n" , i + 1, title);
+        }
+    }
+}

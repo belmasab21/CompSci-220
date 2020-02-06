@@ -1,0 +1,38 @@
+//This class uses 2d arrays, starting on line 24
+import java.util.Scanner;
+import java.util.Arrays;
+class Lab5 {
+ public static void main(String[] args) {
+     Scanner a = new Scanner(System.in);
+     String[] movies = {
+         "Movie I",
+         "Movie II",
+         "1 Movie III",           //This could all go on one line too
+         "Movie IV",
+         "Movie V"
+        }; //end movies array           //  int <-- primitive   int[] <-- object    String <-- object*
+        System.out.println("Movies printing directly: ");
+        System.out.println(movies);
+        
+        System.out.println("Movies printing with Arrays.toString");
+        System.out.println(Arrays.toString(movies));
+        
+        System.out.println("Movies printing with toString and also sorted");
+        Arrays.sort(movies);
+        System.out.println(Arrays.toString(movies));
+        
+        double[][] seatPrices = new double[3][5]   //[rows][columns] 
+        seatPrices[0][0] = 5.00d;    //put d at the end if it's a double, f for float, l for long, etc...
+        seatPrices[0][1] = 5.00d;    //This is all for the first row
+        seatPrices[0][2] = 5.50d;
+        seatPrices[0][3] = 5.00d;
+        seatPrices[0][4] = 5.00d;
+        double[] row = seatPrices[1];
+        for (int col = 0; col < row.length; col++) {    //this for loop will set the same price for the whole 2nd row
+            row[col] = 6.00d;
+        }   //end for
+        for (int col = 0; col < seatPrices[2].length; col++) {  //this is for the last row
+            seatPrices[2][col] = 5.75d;
+        }   //end for
+    } //end main
+} //end Lab5

@@ -1,0 +1,15 @@
+import java.util.Scanner;
+import java.util.Arrays;
+class Week3_HW {
+ public static void main(String[] args) {
+ Scanner a = new Scanner(System.in);
+      System.out.println("Input your favorite movies");
+      System.out.println("How many movies are you going to be inputting?");
+            int movieNumber = a.nextInt();
+      String[] movies = new String[movieNumber];
+      System.out.println("Input the movie titles");
+      
+      System.out.println(movies);
+      
+    } //end main
+} //end HW

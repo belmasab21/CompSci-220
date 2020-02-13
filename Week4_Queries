@@ -1,0 +1,71 @@
+import java.util.Scanner;
+import java.io.File;
+class Lab7 {
+    static final int NUMBER_OF_ALBUMS = 200;    //methods should have ONE job
+    static int[] YEARS = new int[NUMBER_OF_ALBUMS];
+    static String[] TITLES = new String[NUMBER_OF_ALBUMS];
+    static String[] ARTISTS = new String[NUMBER_OF_ALBUMS];
+    static String[] GENRES = new String[NUMBER_OF_ALBUMS];
+    public static void main(String[] args) {
+        readFromFile("Rolling-Stone-Top-500-Albums.csv");
+        printAllAlbums();
+        
+        String favoriteArtist = "Pink Floyd";
+        int albumCount = getNumberOfAlbumsByArtist(favoriteArtist);
+        System.out.printf("Number of albums by %s: %d%n" , favoriteArtist, albumCount);
+    }   //end main
+    
+    static int getNumberOfAlbumsByArtist(String artist) {
+        int count = 0;
+       for (int i = 0; i < NUMBER_OF_ALBUMS; i++) {
+           if (ARTISTS[i].equalsIgnoreCase(artist)) {
+               count++;
+            }   //end if
+        }   //end for
+        return count;
+    }
+    
+    
+    static void printAllAlbums() {
+        for (int i = 0; i < NUMBER_OF_ALBUMS; i++) {
+            String title = TITLES[i];
+            int year = YEARS[i];
+            String artist = ARTISTS[i];
+            String genre = GENRES[i];
+            System.out.printf("%s (%d) by %s [%s]%n" ,title, year, artist, genre); 
+        }
+    }   //end printAllAlbums
+
+    static void readFromFile(String path) {
+        File file = new File (path);
+        Scanner scanner;
+        try {
+            scanner = new Scanner(file);
+        }   //end try
+        catch (Exception e) {
+            System.out.println("File not found");
+            return;
+        }   //end catch
+        String line = scanner.nextLine();  
+        for(int i = 0; i < NUMBER_OF_ALBUMS; i++) {   
+            String[] columns = line.split(", ");
+            int year = Integer.parseInt(columns[1]);
+            String title = columns[2];
+            String artist = columns[3];
+            String genre = columns[4];
+
+            YEARS[i] = year;
+            TITLES[i] = title;
+            ARTISTS[i] = artist;
+            GENRES[i] = genre;
+
+        }   //end for   
+        for(int i = 0; i < NUMBER_OF_ALBUMS; i++) {
+
+            scanner.close();
+
+        }   //end for
+    }   //end readFromFile
+}   //end Lab7
+
+

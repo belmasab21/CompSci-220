@@ -1,0 +1,131 @@
+import java.util.Scanner;
+import java.io.File;
+
+public class Lab8 {
+
+    static final int NUMBER_OF_ALBUMS = 200;
+
+    static final int[] YEARS = new int[NUMBER_OF_ALBUMS];
+    static final String[] TITLES = new String[NUMBER_OF_ALBUMS];
+    static final String[] ARTISTS = new String[NUMBER_OF_ALBUMS];
+    static final String[] GENRES = new String[NUMBER_OF_ALBUMS];
+
+    public static void main(String[] args) {
+        String path = "Rolling-Stone-Top-500-Albums.csv";
+
+        loadAlbumsFromFile(path);
+
+        String favoriteArtist = "Pink Floyd";
+        int albumsByFavoriteArtist = getNumberOfAlbumsByArtist(favoriteArtist);
+        System.out.printf("Albums by %s: %d%n", favoriteArtist, albumsByFavoriteArtist);
+        
+        int oldestAlbumIndex = getOldestAlbum();
+        System.out.printf("The oldest album is %s (%d) by %s [%s]%n" ,TITLES[oldestAlbumIndex], YEARS[oldestAlbumIndex], ARTISTS[oldestAlbumIndex], GENRES[oldestAlbumIndex]);
+        sortAlbumsByYear();
+        printAllAlbums();
+    }
+
+    static void loadAlbumsFromFile(String path) {
+        File file = new File(path);
+
+        Scanner scanner;
+        try {
+            scanner = new Scanner(file);
+        }
+        catch (Exception e) {
+            System.out.println("File not found");
+            return;
+        }
+
+        scanner.nextLine();
+
+        for (int i = 0; i < NUMBER_OF_ALBUMS; i++) {
+            String line = scanner.nextLine();
+
+            String[] columns = line.split(",");
+
+            int year = Integer.parseInt(columns[1]);
+            String title = columns[2];
+            String artist = columns[3];
+            String genre = columns[4];
+
+            YEARS[i] = year;
+            TITLES[i] = title;
+            ARTISTS[i] = artist;
+            GENRES[i] = genre;
+        }
+
+        scanner.close();
+    }
+
+    static void printAllAlbums() {
+        for (int i = 0; i < NUMBER_OF_ALBUMS; i++) {
+            String title = TITLES[i];
+            int year = YEARS[i];
+            String artist = ARTISTS[i];
+            String genre = GENRES[i];
+
+            System.out.printf("%d)\t%s (%d) by %s [%s]%n", i + 1, title, year, artist, genre);
+        }
+    }
+
+    static int getNumberOfAlbumsByArtist(String artist) {
+        int count = 0;
+        for (int i = 0; i < NUMBER_OF_ALBUMS; i++) {
+            if (ARTISTS[i].equals(artist))
+                count++;
+        }
+
+        return count;
+    }
+    
+    static boolean searchForArtist(String artist) {
+        for (int i = 0; i < NUMBER_OF_ALBUMS; i++) {
+         if (ARTISTS[i].equalsIgnoreCase(artist)) {
+             return true;
+            }
+        }
+        return false;
+    }
+    static int getOldestAlbum() {
+        int minIndex = 0;
+     for (int i = 1; i < NUMBER_OF_ALBUMS; i++) {
+         if (YEARS[i] < YEARS[minIndex]) {
+             minIndex = i;
+            }
+        }
+        return minIndex;
+    }
+    
+    static void sortAlbumsByYear() {
+        for (int i = 0; i < NUMBER_OF_ALBUMS; i++) {
+         int minIndex = i;
+         for (int j = i+1; j < NUMBER_OF_ALBUMS; j++) {
+             if (YEARS[j] < YEARS[minIndex]) {
+             minIndex = j;    
+                }
+            }
+            if (minIndex != i) {
+             swap(minIndex, i);   
+            }
+        }
+    }
+    
+    static void swap(int index1, int index2) {
+        int tempYear = YEARS[index1];
+        YEARS[index1] = YEARS[index2];
+        YEARS[index2] = tempYear;
+        
+        String tempTitle = TITLES[index1];
+        TITLES[index1] = TITLES[index2];
+        TITLES[index2] = tempTitle;
+        
+        String tempArtist = ARTISTS[index1];
+        ARTISTS[index1] = ARTISTS[index2];
+        ARTISTS[index2] = tempArtist;
+        
+        String tempGenre = GENRES[index1];
+        GENRES[index1] = GENRES[index2];
+        GENRES[index2] = tempGenre;
+    }
+}

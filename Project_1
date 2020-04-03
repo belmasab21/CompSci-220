@@ -1,0 +1,225 @@
+import java.util.Scanner;
+import java.io.File;
+public class Pokemon{
+    static final int NUMBER_OF_POKEMON = 151;
+
+    static final int[] NUMBERS = new int[NUMBER_OF_POKEMON];
+    static final String[] NAMES = new String[NUMBER_OF_POKEMON];
+    static final String[] TYPE_A = new String[NUMBER_OF_POKEMON];
+    static final String[] TYPE_B = new String[NUMBER_OF_POKEMON];
+    static final int[] ATTACK = new int[NUMBER_OF_POKEMON];
+    static final int[] DEFENSE = new int[NUMBER_OF_POKEMON];
+    static final int[] SPEED = new int[NUMBER_OF_POKEMON];
+    static final String[] LOCATION = new String[NUMBER_OF_POKEMON];
+    public static void main(String[] args){
+        String path = "Pokedex - Sheet1-final.csv";
+        readFromFile(path);
+        
+        Scanner a = new Scanner(System.in);
+        
+        System.out.println("Enter the name of a Pokemon: ");
+        String userInPokemon = a.nextLine();
+        boolean foundPokemon = pokemonSearch(userInPokemon);
+        
+        
+        
+        System.out.println("Sort Pokemon by Name or Number?");
+        String sortAnswer = a.nextLine();
+        
+      
+        //sortPokedexByName();
+        //sortPokedexByNumber();
+        
+        
+    }
+
+    static void readFromFile(String path){
+        File file = new File(path);
+
+        Scanner scanner;
+        try{
+            scanner = new Scanner(file);
+        }catch(Exception e){
+            System.out.println("Error");
+            return;
+        }
+
+        scanner.nextLine();
+        for(int i = 0; i < NUMBER_OF_POKEMON; i++) {
+            String line = scanner.nextLine();
+
+            String[] columns = line.split(",");
+
+            int number = Integer.parseInt(columns[0]);
+            String name = columns[1];
+            String typeA = columns[2];
+            String typeB = columns[3];
+            int atk = Integer.parseInt(columns[4]);
+            int def = Integer.parseInt(columns[5]);
+            int spe = Integer.parseInt(columns[6]);
+            String loc = columns[7]; 
+
+            NUMBERS[i] = number;
+            NAMES[i] = name;
+            TYPE_A[i] = typeA;
+            TYPE_B[i] = typeB;
+            ATTACK[i] = atk;
+            DEFENSE[i] = def;
+            SPEED[i] = spe;
+            LOCATION[i] = loc;
+        }
+        scanner.close();
+    }
+
+    static void printAll(){
+        for(int i = 0; i < NUMBER_OF_POKEMON; i++){
+            int number = NUMBERS[i];
+            String name = NAMES[i];
+            String typeA = TYPE_A[i];
+            String typeB = TYPE_B[i];
+            int atk = ATTACK[i];
+            int def = DEFENSE[i];
+            int spe = SPEED[i];
+            String loc = LOCATION[i];
+            if(typeB == null){
+                System.out.printf("(%d) %s [ %s Type ] ATK: %d, DEF: %d, SPE: %d (%s) %n", number, name, typeA, atk, def, spe, loc);
+            }else{
+                System.out.printf("(%d) %s [ %s, %s Type ] ATK: %d, DEF: %d, SPE: %d (%s) %n", number, name,  typeA, typeB, atk, def, spe, loc);
+            }
+        }
+    }
+static boolean pokemonSearch(String userInPokemon) {
+        Scanner a = new Scanner(System.in);
+
+        for(int i = 0; i < NUMBER_OF_POKEMON; i++){
+            int number = NUMBERS[i];
+            
+            String typeA = TYPE_A[i];
+            String typeB = TYPE_B[i];
+            int atk = ATTACK[i];
+            int def = DEFENSE[i];
+            int spe = SPEED[i];
+            String loc = LOCATION[i];
+            
+            if(NAMES[i].equalsIgnoreCase(userInPokemon)) {
+                System.out.printf("(%d) %s[ %s Type ] ATK: %d, DEF: %d, SPE: %d (%s) %n", number, userInPokemon, typeA, atk, def, spe, loc);
+                System.out.print(weakness(userInPokemon));
+                return true;
+            }  
+            else {
+                i++;  
+            }
+        }
+        return false;
+    }
+
+    public static String weakness(String userInPokemon) {
+        String weakness = "";
+        for(int i = 0; i < NUMBER_OF_POKEMON; i++){  
+            
+            Scanner b = new Scanner(System.in);
+            String name = NAMES[i];
+            String typeA = TYPE_A[i];
+            
+            userInPokemon = name;
+            
+            if(NAMES[i].equalsIgnoreCase(name)) {
+                if (typeA == "Bug") {
+                    weakness = "Fairy"; 
+                } else if (typeA == "Dark") {
+                    weakness = "fighting";  
+                }   else if (typeA == "Dragon") {
+                    weakness = "dragon";  
+                }   else if (typeA == "Fairy") {
+                    weakness = "poison";
+                }   else if (typeA == "Electric") {
+                    weakness = "ground";  
+                }   else if (typeA == "Fighting") {
+                    weakness = "flying";  
+                }   else if (typeA == "Fire") {
+                    weakness = "water"; 
+                }   else if (typeA == "Flying") {
+                    weakness = "electric";
+                }   else if (typeA == "Ghost") {
+                    weakness = "dark"; 
+                }   else if (typeA == "Grass") {
+                    weakness = "fire";  
+                }   else if (typeA == "Ground") {
+                    weakness = "bug";  
+                }   else if (typeA == "Ice") {
+                    weakness = "fire";  
+                }   else if (typeA == "Normal") {
+                    weakness = "fighting"; 
+                }   else if (typeA == "Poison") {
+                    weakness = "ground";  
+                }   else if (typeA == "Psychic") {
+                    weakness = "dark";  
+                }   else if (typeA == "Rock") {
+                    weakness = "fighting"; 
+                }   else if (typeA == "Steel") {
+                    weakness = " electric";  
+                }   else if (typeA == "Water") {
+                    weakness = "grass"; 
+                }
+                else {
+                    return "";
+                }
+                 
+            }
+            
+        }
+        System.out.println("Pokemon is weak to: ");
+            return weakness;
+    }
+    
+    
+    static void swap(int index1, int index2) {
+        int tempNumber = NUMBERS[index1];
+        String tempName = NAMES[index1];
+        String tempTypeA = TYPE_A[index1];
+        String tempTypeB = TYPE_B[index1];
+
+        NUMBERS[index1] = NUMBERS[index2];
+        NAMES[index1] = NAMES[index2];
+        TYPE_A[index1] = TYPE_A[index2];
+        TYPE_B[index1] = TYPE_B[index2];
+
+        NUMBERS[index2] = tempNumber;
+        NAMES[index2] = tempName;
+        TYPE_A[index2] = tempTypeA;
+        TYPE_B[index2] = tempTypeB;
+    }
+    
+    static void sortPokedexByName(){
+        for(int i=0; i<NUMBER_OF_POKEMON; i++){
+            for(int j=i+1; j<NUMBER_OF_POKEMON; j++){
+                if(NAMES[i].compareTo(NAMES[j])>0){
+                    String temp;
+                    temp = NAMES[i];
+                    NAMES[i] = NAMES[j];
+                    NAMES[j] = temp;
+                }
+            }
+        }
+        
+        System.out.println("Pokemon from A to Z:");
+        for(int i = 0; i<= NUMBER_OF_POKEMON; i++){
+            System.out.print(NAMES[i] + "\n");
+        }
+    }
+
+    static void sortPokedexByNumber(){
+        for (int i = 0; i < NUMBER_OF_POKEMON; i++) {
+            int minIndex = i;
+            for (int j = i + 1; j < NUMBER_OF_POKEMON; j++) {
+                if (NUMBERS[j] < NUMBERS[minIndex])
+                    minIndex = j;
+            }
+            if (minIndex != i)
+                swap(i, minIndex);
+        }
+    }
+    
+    
+}
+
